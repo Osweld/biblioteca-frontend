@@ -5,7 +5,13 @@ export const LAYOUT_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/layout/layout.component'), children: [
-      {path: 'dashboard', loadComponent: () => import('../dashboard/pages/dashboard/dashboard.component')},
+      {path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)},
+      {path:'material',loadChildren: () => import('../material/material.routes').then(m => m.MATERIAL_ROUTES)},
+      {path:'miembros',loadChildren: () => import('../miembros/miembros.routes').then(m => m.MIEMBROS_ROUTES)},
+      {path:'bibliotecarios',loadChildren: () => import('../bibliotecarios/bibliotecarios.routes').then(m => m.BIBLIOTECARIOS_ROUTES)},
+      {path:'prestamos',loadChildren: () => import('../prestamos/prestamos.routes').then(m => m.PRESTAMOS_ROUTES)},
+      {path:'devoluciones',loadChildren: () => import('../devoluciones/devoluciones.routes').then(m => m.DEVOLUCIONES_ROUTES)},
+      {path:'configuracion',loadChildren: () => import('../configuracion/configuracion.routes').then(m => m.CONFIGURACION_ROUTES)}
     ]
   },
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'}
