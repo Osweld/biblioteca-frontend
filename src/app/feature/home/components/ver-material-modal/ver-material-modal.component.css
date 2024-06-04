@@ -1,0 +1,27 @@
+.modal-content {
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header.bg-primary {
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.btn-close-white {
+  filter: invert(1);
+}
+
+.modal-body {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.modal-body p {
+  margin-bottom: 10px;
+}
+
+.modal-footer {
+  border-top: none;
+}

@@ -1,1 +1,119 @@
-<p>materiales works!</p>
+<section class="section-bg-light-gray">
+  <section>
+    <div class="container pt-5">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="section-title">Bienvenido!</h2>
+          <p class="section-description">En esta seccion podras vizualizar el material educativo que tenemos a
+            dispocision
+            para todos los miembros de la biblioteca ademas podras ver cuales de ellos estan disponibles para prestamo
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="mt-4">
+    <div class="col-md-12">
+      <form class="d-flex justify-content-center align-items-md-center">
+        <input class="form-control me-2" type="number" [formControl]="id" placeholder="Buscar material, introduce el ID..." aria-label="Buscar" style="max-width: 600px;">
+        <button class="btn btn-outline-primary" type="submit" (click)="searchMaterial()">Buscar</button>
+      </form>
+    </div>
+  </div>
+  <section>
+    <form [formGroup]="FilterData" (ngSubmit)="onFilterSubmit()" class="p-4 bg-light rounded shadow-sm">
+      <div class="row mb-3">
+        <div class="col-md-3">
+          <label for="idioma" class="form-label">Idioma</label>
+          <select id="idioma" class="form-select" formControlName="idioma">
+            <option value="">-- Seleccione una opcion --</option>
+            @for (idioma of idiomas; track $index) {
+              <option [value]="idioma.id">{{ idioma.nombre }}</option>
+            }
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="autor" class="form-label">Autor</label>
+          <select id="autor" class="form-select" formControlName="autor">
+            <option value="">-- Seleccione una opcion --</option>
+            @for (autor of autores; track $index) {
+              <option [value]="autor.id">{{ autor.autor }}</option>
+            }
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="categoria" class="form-label">Categoría</label>
+          <select id="categoria" class="form-select" formControlName="categoria">
+            <option value="">-- Seleccione una opcion --</option>
+            @for (categoria of categorias; track $index) {
+              <option  [value]="categoria.id">{{ categoria.nombre }}</option>
+            }
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="estado" class="form-label">Estado del Material</label>
+          <select id="estado" class="form-select" formControlName="estado">
+            <option value="">-- Seleccione una opcion --</option>
+            @for (estado of estadoMaterial; track $index) {
+              <option  [value]="estado.id">{{ estado.estado }}</option>
+            }
+          </select>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="font-bold btn btn-primary py-2 px-5">Filtrar</button>
+      </div>
+    </form>
+  <section class="mx-4">
+    <!-- Modal -->
+@if(materialPage.content.length > 0){
+
+
+    <div class="table-container mt-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">ISBN</th>
+            <th scope="col">Título</th>
+            <th scope="col">Idioma</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Estado del Material</th>
+            <th scope="col">Disponibilidad</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+
+            @for (material of materialPage.content; track material.id) {
+              <tr>
+            <td>{{ material.id }}</td>
+            <td>{{ material.isbm }}</td>
+            <td>{{ material.titulo }}</td>
+            <td>{{ material.idioma.nombre }}</td>
+            <td>{{ material.autor.autor }}</td>
+            <td>{{ material.categoria.nombre }}</td>
+            <td>{{ material.estadoMaterial.estado }}</td>
+            <td>{{ material.cantidad }} / {{material.inventario.stock}}</td>
+            <td><a class="btn text-bg-secondary" (click)="openModal(material)">Ver Info</a></td>
+          </tr>
+            }
+        </tbody>
+      </table>
+    </div>
+  } @else{
+    <div class="alert alert-warning text-center" role="alert">
+      No se encontraron resultados
+    </div>
+  }
+  </section>
+
+  @if (pagina.totalPages > 1) {
+    <app-pagination [pagina]="pagina" (selectPage)="nextPage($event)"></app-pagination>
+  }
+
+</section>
+
+
+<app-ver-material-modal [material]="selectedMaterial"></app-ver-material-modal>

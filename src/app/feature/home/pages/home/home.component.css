@@ -1,0 +1,17 @@
+.hero {
+  background-image: url('../../../../../assets/img/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+}
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 50px;
+  border-radius: 10px;
+}
+.btn-primary {
+  background-color: #0062cc;
+  border-color: #0056b3;
+}

@@ -1,0 +1,35 @@
+<div class="modal fade" id="materialDetailModal" tabindex="-1" aria-labelledby="materialDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="materialDetailModalLabel">Detalle del Material</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        @if (material) {
+          <div class="row">
+            <div class="col-md-6">
+              <p><strong>ID:</strong> {{ material.id }}</p>
+              <p><strong>ISBN:</strong> {{ material.isbm }}</p>
+              <p><strong>Título:</strong> {{ material.titulo }}</p>
+              <p><strong>Cantidad:</strong> {{ material.cantidad }}</p>
+              <p><strong>Descripción:</strong> {{ material.descripcion }}</p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Idioma:</strong> {{ material.idioma.nombre }}</p>
+              <p><strong>Autor:</strong> {{ material.autor.autor }}</p>
+              <p><strong>Categoría:</strong> {{ material.categoria.nombre }}</p>
+              <p><strong>Estado del Material:</strong> {{ material.estadoMaterial.estado }}</p>
+              <p><strong>Disponibilidad:</strong> {{ material.inventario.stock }}</p>
+            </div>
+          </div>
+        }@else {
+          <p>No hay información disponible</p>
+        }
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
