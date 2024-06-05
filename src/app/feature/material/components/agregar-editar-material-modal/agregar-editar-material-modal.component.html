@@ -1,0 +1,129 @@
+<div class="modal fade" id="agregarEditarMaterialModal" tabindex="-1" aria-labelledby="agregarEditarMaterialModalLabel"
+  aria-hidden="true" (shown.bs.modal)="onModalShown()">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="agregarEditarMaterialModalLabel">Agregar Material Educativo</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="materialForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="isbn" class="form-label">ISBN</label>
+                <input type="text" id="isbn" formControlName="isbn" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('isbn')}">
+                <div class="invalid-feedback">
+                  @for (validation of materialFormValidationMessage.isbn; track $index) {
+                    @if (materialForm.get('isbn')?.hasError(validation.type) && (materialForm.get('isbn')?.dirty || materialForm.get('isbn')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="titulo" class="form-label">Título</label>
+                <input type="text" id="titulo" formControlName="titulo" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('titulo')}">
+                <div class="invalid-feedback">
+                  @for (validation of materialFormValidationMessage.titulo; track $index) {
+                    @if (materialForm.get('titulo')?.hasError(validation.type) && (materialForm.get('titulo')?.dirty || materialForm.get('titulo')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="cantidad" class="form-label">Cantidad</label>
+                <input type="number" id="cantidad" formControlName="cantidad" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('cantidad')}">
+                <div class="invalid-feedback">
+                  @for (validation of materialFormValidationMessage.cantidad; track $index) {
+                    @if (materialForm.get('cantidad')?.hasError(validation.type) && (materialForm.get('cantidad')?.dirty || materialForm.get('cantidad')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea id="descripcion" formControlName="descripcion" class="form-control" rows="3" [ngClass]="{'is-invalid': isFieldInvalid('descripcion')}"></textarea>
+                <div class="invalid-feedback">
+                  @for (validation of materialFormValidationMessage.descripcion; track $index) {
+                    @if (materialForm.get('descripcion')?.hasError(validation.type) && (materialForm.get('descripcion')?.dirty || materialForm.get('descripcion')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="idioma" class="form-label">Idioma</label>
+                <select id="idioma" formControlName="idioma" class="form-select" [ngClass]="{'is-invalid': isFieldInvalid('idioma')}">
+                  @for (idioma of select?.idiomas; track $index) {
+                    <option [value]="idioma.id">{{ idioma.nombre }}</option>
+                  }
+                </select>
+                <div class="invalid-feedback">
+                  @for (validation of materialFormValidationMessage.idioma; track $index) {
+                    @if (materialForm.get('idioma')?.hasError(validation.type) && (materialForm.get('idioma')?.dirty || materialForm.get('idioma')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="autor" class="form-label">Autor</label>
+                <select id="autor" formControlName="autor" class="form-select" [ngClass]="{'is-invalid': isFieldInvalid('autor')}">
+                  @for (autor of select?.autores; track $index) {
+                    <option [value]="autor.id">{{ autor.autor }}</option>
+                  }
+                </select>
+                <div class="invalid-feedback">
+                  @for (validation of materialFormValidationMessage.autor; track $index) {
+                    @if (materialForm.get('autor')?.hasError(validation.type) && (materialForm.get('autor')?.dirty || materialForm.get('autor')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="categoria" class="form-label">Categoría</label>
+                <select id="categoria" formControlName="categoria" class="form-select" [ngClass]="{'is-invalid': isFieldInvalid('categoria')}">
+                  @for (categoria of select?.categorias; track $index) {
+                    <option [value]="categoria.id">{{ categoria.nombre }}</option>
+                  }
+                </select>
+                <div class="invalid-feedback">
+                  @for (validation of materialFormValidationMessage.categoria; track $index) {
+                    @if (materialForm.get('categoria')?.hasError(validation.type) && (materialForm.get('categoria')?.dirty || materialForm.get('categoria')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="estadoMaterial" class="form-label">Estado del Material</label>
+                <select id="estadoMaterial" formControlName="estadoMaterial" class="form-select" [ngClass]="{'is-invalid': isFieldInvalid('estadoMaterial')}">
+                  @for (estado of select?.estados; track $index) {
+                    <option [value]="estado.id">{{ estado.estado }}</option>
+                  }
+                </select>
+                <div class="invalid-feedback">
+                  @for (validation of materialFormValidationMessage.estadoMaterial; track $index) {
+                    @if (materialForm.get('estadoMaterial')?.hasError(validation.type) && (materialForm.get('estadoMaterial')?.dirty || materialForm.get('estadoMaterial')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="materialForm.invalid">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

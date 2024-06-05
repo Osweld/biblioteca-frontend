@@ -1,0 +1,38 @@
+<div class="modal fade" id="verMiembroModal" tabindex="-1" aria-labelledby="verMiembroModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-secondary text-white">
+        <h5 class="modal-title" id="verMiembroModalLabel">Detalles del Miembro</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        @if (miembro) {
+          <div class="row">
+            <div class="col-md-6">
+              <p><strong>ID:</strong> {{ miembro.id }}</p>
+              <p><strong>Nombre:</strong> {{ miembro.nombre }}</p>
+              <p><strong>Apellido:</strong> {{ miembro.apellido }}</p>
+              <p><strong>Email:</strong> {{ miembro.email }}</p>
+              <p><strong>Fecha de Nacimiento:</strong> {{ miembro.fechaNacimiento | date }}</p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Género:</strong> {{ miembro.genero.nombre }}</p>
+              <p><strong>Estado del Usuario:</strong> {{ miembro.estadoUsuario.estado }}</p>
+              <p><strong>DUI:</strong> {{ miembro.dui }}</p>
+              <p><strong>Fecha de Ingreso:</strong> {{ miembro.ingreso | date }}</p>
+              <p><strong>Expiración de Membresía:</strong> {{ miembro.expiracionMembresia | date }}</p>
+            </div>
+          </div>
+        } @else {
+          <p>No se encontró información del miembro</p>
+        }
+      </div>
+      <div class="modal-footer">
+        <div class="w-100 d-flex justify-content-between align-items-center">
+         <p><strong class="fs-3">{{miembro?.rol?.rol}}</strong></p>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

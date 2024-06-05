@@ -1,1 +1,64 @@
-<p>miembros works!</p>
+<section class="section-bg-light-gray rounded p-4">
+  <section class="d-flex justify-content-center align-items-center">
+    <h1 class="text-center">Miembros de la biblioteca</h1>
+  </section>
+  <div class="my-4">
+    <div class="col-md-12">
+      <form class="d-flex justify-content-center align-items-md-center">
+        <input class="form-control me-2" type="number" [formControl]="id" placeholder="Buscar miembro, introduce el DUI..." aria-label="Buscar" style="max-width: 600px;">
+        <button class="btn btn-outline-primary" type="submit" (click)="searchMiembro()">Buscar</button>
+      </form>
+    </div>
+  </div>
+  <section class="pt-4">
+    <div class="d-flex justify-content-end align-items-center">
+      <a class="btn btn-outline-primary" (click)="openModalAgregar()">Agregar material educativo</a>
+    </div>
+  </section>
+  <section class="mx-4">
+    @if(miembrosPage) {
+      <div class="table-container mt-4">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">Email</th>
+              <th scope="col">Fecha de Nacimiento</th>
+              <th scope="col">Género</th>
+              <th scope="col">Estado del Usuario</th>
+              <th scope="col">DUI</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (miembro of miembrosPage.content; track miembro.id) {
+              <tr>
+                <td>{{ miembro.id }}</td>
+                <td>{{ miembro.nombre }}</td>
+                <td>{{ miembro.apellido }}</td>
+                <td>{{ miembro.email }}</td>
+                <td>{{ miembro.fechaNacimiento | date }}</td>
+                <td>{{ miembro.genero.nombre }}</td>
+                <td>{{ miembro.estadoUsuario.estado }}</td>
+                <td>{{ miembro.dui }}</td>
+                <td><a class="btn text-bg-secondary" (click)="openModalVer(miembro)">Ver Info</a></td>
+                <td><a class="btn text-bg-dark" (click)="openModalEditar(miembro)">Editar</a></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <div class="alert alert-warning text-center" role="alert">
+        No se encontraron resultados
+      </div>
+    }
+  </section>
+</section>
+
+
+<app-ver-miembro-modal [miembro]="selectedMiembro" ></app-ver-miembro-modal>
+<app-agregar-editar-miembro-modal [miembro]="selectedMiembro" ></app-agregar-editar-miembro-modal>

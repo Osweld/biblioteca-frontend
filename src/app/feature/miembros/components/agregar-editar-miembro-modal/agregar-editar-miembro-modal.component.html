@@ -1,0 +1,114 @@
+<div class="modal fade" id="agregarEditarMiembroModal" tabindex="-1" aria-labelledby="agregarEditarMiembroModalLabel"
+(shown.bs.modal)="onModalShown()"
+aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="agregarEditarMiembroModalLabel">Agregar/Editar Miembro</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="miembroForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" formControlName="nombre" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('nombre')}">
+                <div class="invalid-feedback">
+                  @for (validation of miembroFormValidationMessage.nombre; track $index) {
+                    @if (miembroForm.get('nombre')?.hasError(validation.type) && (miembroForm.get('nombre')?.dirty || miembroForm.get('nombre')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" id="apellido" formControlName="apellido" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('apellido')}">
+                <div class="invalid-feedback">
+                  @for (validation of miembroFormValidationMessage.apellido; track $index) {
+                    @if (miembroForm.get('apellido')?.hasError(validation.type) && (miembroForm.get('apellido')?.dirty || miembroForm.get('apellido')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" formControlName="email" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('email')}">
+                <div class="invalid-feedback">
+                  @for (validation of miembroFormValidationMessage.email; track $index) {
+                    @if (miembroForm.get('email')?.hasError(validation.type) && (miembroForm.get('email')?.dirty || miembroForm.get('email')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="text" id="telefono" formControlName="telefono" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('telefono')}">
+                <div class="invalid-feedback">
+                  @for (validation of miembroFormValidationMessage.telefono; track $index) {
+                    @if (miembroForm.get('telefono')?.hasError(validation.type) && (miembroForm.get('telefono')?.dirty || miembroForm.get('telefono')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <textarea id="direccion" formControlName="direccion" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('fechaNacimiento')}">
+                <div class="invalid-feedback">
+                  @for (validation of miembroFormValidationMessage.fechaNacimiento; track $index) {
+                    @if (miembroForm.get('fechaNacimiento')?.hasError(validation.type) && (miembroForm.get('fechaNacimiento')?.dirty || miembroForm.get('fechaNacimiento')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="genero" class="form-label">Género</label>
+                <select id="genero" formControlName="genero" class="form-select">
+                  <option value="">-- Seleccione una opcion --</option>
+                  @for (genero of generos; track $index) {
+                  <option [value]="genero.id">{{ genero.nombre }}</option>
+                  }
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="dui" class="form-label">DUI</label>
+                <input type="text" id="dui" formControlName="dui" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('dui')}">
+                <div class="invalid-feedback">
+                  @for (validation of miembroFormValidationMessage.dui; track $index) {
+                    @if (miembroForm.get('dui')?.hasError(validation.type) && (miembroForm.get('dui')?.dirty || miembroForm.get('dui')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="rol" class="form-label">Rol</label>
+                <select id="rol" formControlName="rol" class="form-select">
+                  <option value="">-- Seleccione una opcion --</option>
+                  @for (rol of roles; track $index) {
+                  <option [value]="rol.id">{{ rol.rol }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="miembroForm.invalid">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

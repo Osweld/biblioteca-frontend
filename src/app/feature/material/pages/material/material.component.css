@@ -1,0 +1,35 @@
+.section-bg-light-gray {
+  background-color: #f8f9fa;
+}
+.section-title {
+color: #007bff; /* Color azul vibrante */
+font-size: 2.5rem; /* Tamaño de fuente más grande */
+font-family: 'Arial', sans-serif; /* Fuente sans-serif moderna */
+margin-bottom: 20px; /* Espacio vertical entre título y párrafo */
+}
+
+.section-description {
+text-align: center; /* Centrar texto del párrafo */
+font-size: 1.2rem; /* Ajustar tamaño de fuente para móviles */
+font-weight: 600;
+}
+
+.container {
+padding: 30px; /* Espacio alrededor del contenido */
+}
+
+@media (max-width: 768px) {
+.row {
+  flex-wrap: wrap; /* Distribuir elementos en varias filas */
+}
+}
+
+.agregar-material {
+  background-color: #f2f2f2; /* Color de fondo opcional */
+}
+
+.btn-lg {
+  font-size: 1.5rem; /* Aumentar tamaño de fuente del botón */
+  padding: 1.5rem 3rem; /* Aumentar espacio interno del botón */
+  border-radius: 0.5rem; /* Redondear esquinas del botón */
+}

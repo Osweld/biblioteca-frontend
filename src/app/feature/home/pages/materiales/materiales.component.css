@@ -1,4 +1,25 @@
 .section-bg-light-gray {
     background-color: #f8f9fa;
 }
+.section-title {
+  color: #007bff; /* Color azul vibrante */
+  font-size: 2.5rem; /* Tamaño de fuente más grande */
+  font-family: 'Arial', sans-serif; /* Fuente sans-serif moderna */
+  margin-bottom: 20px; /* Espacio vertical entre título y párrafo */
+}
 
+.section-description {
+  text-align: center; /* Centrar texto del párrafo */
+  font-size: 1.2rem; /* Ajustar tamaño de fuente para móviles */
+  font-weight: 600;
+}
+
+.container {
+  padding: 30px; /* Espacio alrededor del contenido */
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-wrap: wrap; /* Distribuir elementos en varias filas */
+  }
+}

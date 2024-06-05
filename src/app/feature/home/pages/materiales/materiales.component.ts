@@ -8,11 +8,12 @@ import { Pagination } from '../../../../shared/shared.interface';
 import { VerMaterialModalComponent } from '../../components/ver-material-modal/ver-material-modal.component';
 import { Modal } from 'bootstrap';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-materiales',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, PaginationComponent, VerMaterialModalComponent, AlertComponent],
+  imports: [ReactiveFormsModule, FormsModule, PaginationComponent, VerMaterialModalComponent, AlertComponent,RouterModule],
   templateUrl: './materiales.component.html',
   styleUrl: './materiales.component.css'
 })
@@ -34,7 +35,7 @@ export class MaterialesComponent {
   }
 
   page: number = 0;
-  size: number = 20;
+  size: number = 5;
   idIdioma?: number;
   idAutor?: number;
   idCategoria?: number;

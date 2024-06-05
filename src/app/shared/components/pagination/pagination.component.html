@@ -1,17 +1,20 @@
 @if (pagina && pagina.totalPages > 1) {
-<div class="d-flex justify-content-between px-3 py-2">
-  <button class="btn btn-warning" (click)="changePage(0)">Primera página</button>
-  <div class="d-flex">
-    @if (pagina.page > 0) {
-    <button class="btn btn-warning me-2" (click)="changePage(pagina.page-1)">{{pagina.page}}</button>
-    }
-
-    <button class="btn btn-warning">{{pagina.page+1}}</button>
-    @if (pagina.page+1 < pagina.totalPages) { <button class="btn btn-warning ms-2" (click)="changePage(pagina.page+1)">
-      {{pagina.page+2}}</button>
+<div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-between px-3 py-2 w-50">
+    <button class="btn btn-warning" (click)="changePage(0)">Primera página</button>
+    <div class="d-flex">
+      @if (pagina.page > 0) {
+      <button class="btn btn-warning me-2" (click)="changePage(pagina.page-1)">{{pagina.page}}</button>
       }
 
+      <button class="btn btn-warning">{{pagina.page+1}}</button>
+      @if (pagina.page+1 < pagina.totalPages) { <button class="btn btn-warning ms-2"
+        (click)="changePage(pagina.page+1)">
+        {{pagina.page+2}}</button>
+        }
+
+    </div>
+    <button class="btn btn-warning " (click)="changePage(pagina.totalPages-1)">Última página</button>
   </div>
-  <button class="btn btn-warning" (click)="changePage(pagina.totalPages-1)">Última página</button>
 </div>
 }

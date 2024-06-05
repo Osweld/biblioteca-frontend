@@ -17,6 +17,13 @@ export interface MaterialState {
   loading: boolean;
 }
 
+export interface SelectsMaterial {
+  autores: Autor[];
+  categorias: Categoria[];
+  idiomas: Idioma[];
+  estados: EstadoMaterial[];
+}
+
 export interface Material {
   id: number;
   isbn: string;
@@ -28,6 +35,18 @@ export interface Material {
   categoria: Categoria;
   estadoMaterial: EstadoMaterial;
   inventario: Inventario;
+}
+
+export interface MaterialSave {
+  id?: number;
+  isbn: string;
+  titulo: string;
+  cantidad: number;
+  descripcion: string;
+  idioma: Idioma;
+  autor: Autor;
+  categoria: Categoria;
+  estadoMaterial: EstadoMaterial;
 }
 
 export interface Autor {

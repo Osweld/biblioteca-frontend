@@ -3,7 +3,11 @@
     <div class="container pt-5">
       <div class="row">
         <div class="col-md-12">
-          <h2 class="section-title">Bienvenido!</h2>
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="section-title">Bienvenido!</h2>
+            <a class="btn btn-outline-secondary" [routerLink]="'/inicio'">Regresar</a>
+          </div>
+
           <p class="section-description">En esta seccion podras vizualizar el material educativo que tenemos a
             dispocision
             para todos los miembros de la biblioteca ademas podras ver cuales de ellos estan disponibles para prestamo
@@ -12,7 +16,7 @@
       </div>
     </div>
   </section>
-  <div class="mt-4">
+  <div class="my-4">
     <div class="col-md-12">
       <form class="d-flex justify-content-center align-items-md-center">
         <input class="form-control me-2" type="number" [formControl]="id" placeholder="Buscar material, introduce el ID..." aria-label="Buscar" style="max-width: 600px;">
@@ -64,9 +68,10 @@
         <button type="submit" class="font-bold btn btn-primary py-2 px-5">Filtrar</button>
       </div>
     </form>
+    </section>
   <section class="mx-4">
     <!-- Modal -->
-@if(materialPage.content.length > 0){
+@if(materialPage){
 
 
     <div class="table-container mt-4">
@@ -89,7 +94,7 @@
             @for (material of materialPage.content; track material.id) {
               <tr>
             <td>{{ material.id }}</td>
-            <td>{{ material.isbm }}</td>
+            <td>{{ material.isbn }}</td>
             <td>{{ material.titulo }}</td>
             <td>{{ material.idioma.nombre }}</td>
             <td>{{ material.autor.autor }}</td>
@@ -103,7 +108,7 @@
       </table>
     </div>
   } @else{
-    <div class="alert alert-warning text-center" role="alert">
+    <div class="alert alert-warning text-center my-4" role="alert">
       No se encontraron resultados
     </div>
   }
