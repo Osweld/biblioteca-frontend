@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule } from '@angular/common';
 import { RecuperarPasswordModalComponent } from '../../components/recuperar-password-modal/recuperar-password-modal.component';
 import { Modal } from 'bootstrap';
+import { Login } from '../../login.interface';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,8 @@ export default class LoginComponent {
   public authService = inject(AuthService);
   public sharedService = inject(SharedService);
   public fb = inject(FormBuilder);
+
+  login?:Login
 
   loginForm: FormGroup;
 
@@ -51,7 +54,19 @@ export default class LoginComponent {
 
 
   onSubmit(){
-
+    if(this.loginForm.valid){
+      this.login = {
+        username: this.loginForm.get('usuario')?.value,
+        password: this.loginForm.get('password')?.value
+      }
+    this.authService.login(this.login).subscribe({
+      next: response =>{
+        console.log(response)
+      },error: error => {
+        console.error(error);
+      }
+    })
+    }
   }
 
   recuperarPassword(){
