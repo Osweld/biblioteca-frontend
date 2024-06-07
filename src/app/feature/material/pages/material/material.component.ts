@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-material',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, PaginationComponent, VerMaterialModalComponent, AlertComponent,RouterModule,AgregarEditarMaterialModalComponent],
+  imports: [ReactiveFormsModule, FormsModule, PaginationComponent, VerMaterialModalComponent, AlertComponent, RouterModule, AgregarEditarMaterialModalComponent],
   templateUrl: './material.component.html',
   styleUrl: './material.component.css'
 })
@@ -59,6 +59,7 @@ export default class MaterialComponent {
   public sharedService = inject(SharedService);
 
   id = new FormControl('');
+  idEditar = new FormControl('');
   FilterData = new FormGroup({
     idioma: new FormControl(''),
     categoria: new FormControl(''),
@@ -81,20 +82,20 @@ export default class MaterialComponent {
         }
       );
 
-      this.materialUpdatedSub = this.materialService.getMaterialUpdatedListener()
+    this.materialUpdatedSub = this.materialService.getMaterialUpdatedListener()
       .subscribe(() => {
         this.page = 0; // Reinicia la página al aplicar filtros
-    this.materialService.getMateriales(this.page, this.size, this.idIdioma, this.idAutor, this.idCategoria, this.idEstadoMaterial)
-      .subscribe(
-        data => {
-          this.materialPage = data;
-          this.pagina = {
-            totalElements: data.totalElements,
-            totalPages: data.totalPages,
-            page: data.number
-          }
-        }
-      );
+        this.materialService.getMateriales(this.page, this.size, this.idIdioma, this.idAutor, this.idCategoria, this.idEstadoMaterial)
+          .subscribe(
+            data => {
+              this.materialPage = data;
+              this.pagina = {
+                totalElements: data.totalElements,
+                totalPages: data.totalPages,
+                page: data.number
+              }
+            }
+          );
       });
 
 
@@ -103,6 +104,7 @@ export default class MaterialComponent {
 
 
   searchMaterial() {
+
     this.materialService.getMaterialById(Number(this.id.value)).subscribe({
       next: material => {
         this.selectedMaterial = material;
@@ -111,6 +113,7 @@ export default class MaterialComponent {
           const modal = new Modal(modalElement);
           modal.show();
         }
+        this.id.setValue('');
       },
       error: error => {
         this.sharedService.showAlert('danger', 'No se encontró el material con el ID proporcionado');
@@ -204,6 +207,29 @@ export default class MaterialComponent {
       const modal = new Modal(modalElement);
       modal.show();
     }
+  }
+
+  editarMaterialById() {
+    this.materialService.getMaterialById(Number(this.idEditar.value)).subscribe({
+      next: material => {
+        this.selectedMaterial = material;
+        this.select = {
+          autores: this.autores,
+          categorias: this.categorias,
+          idiomas: this.idiomas,
+          estados: this.estadoMaterial
+        }
+        const modalElement = document.getElementById('agregarEditarMaterialModal');
+        if (modalElement) {
+          const modal = new Modal(modalElement);
+          modal.show();
+        }
+        this.idEditar.setValue('');
+      },
+      error: error => {
+        this.sharedService.showAlert('danger', 'No se encontró el material con el ID proporcionado');
+      }
+    });
   }
 
   openModalEditar(material: Material) {

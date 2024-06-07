@@ -1,0 +1,48 @@
+<section class="section-bg-light-gray rounded p-4">
+  <section class="d-flex justify-content-center align-items-center">
+    <h1 class="text-center">Egresos o gastos de la biblioteca</h1>
+  </section>
+
+  <section class="my-4 d-flex justify-content-center align-items-center">
+    <a class="btn btn-outline-secondary my-1 shadow" (click)="openModalAgregar()">Agregar Egreso</a>
+  </section>
+
+  <section class="mx-4 shadow">
+    @if(egresoPage) {
+      <div class="table-container mt-4">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Monto</th>
+              <th scope="col">Fecha de Pago</th>
+              <th scope="col">Tipo de Egreso</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (egreso of egresoPage.content; track egreso.id) {
+              <tr>
+                <td>{{ egreso.id }}</td>
+                <td><strong class="text-danger">{{ egreso.monto | currency }}</strong></td>
+                <td>{{ egreso.fechaPago | date }}</td>
+                <td>{{ egreso.tipoEgreso.tipo }}</td>
+                <td><a class="btn btn-danger shadow" (click)="deleteEgreso(egreso)">Eliminar Egreso</a></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <div class="alert alert-warning text-center" role="alert">
+        No se encontraron resultados
+      </div>
+    }
+  </section>
+  @if (pagina.totalPages > 1) {
+    <app-pagination [pagina]="pagina" (selectPage)="nextPage($event)"></app-pagination>
+  }
+</section>
+
+<app-agregar-egreso-modal></app-agregar-egreso-modal>
+<app-eliminar-egreso-modal [egreso]="egresoSelected"></app-eliminar-egreso-modal>

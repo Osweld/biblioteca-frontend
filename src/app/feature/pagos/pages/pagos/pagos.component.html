@@ -1,0 +1,46 @@
+<section class="section-bg-light-gray rounded p-4">
+  <section class="d-flex justify-content-center align-items-center">
+    <h1 class="text-center">Pagos realizados por prestmos</h1>
+
+  </section>
+  <section class="mx-4 shadow">
+    @if (pagoPage) {
+      <div class="table-container mt-4">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Monto</th>
+              <th scope="col">Fecha de Pago</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">Rol</th>
+              <th scope="col">Tipo de Pago</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (pago of pagoPage.content; track pago.id) {
+              <tr>
+                <td>{{ pago.id }}</td>
+                <td><strong class="text-success">{{ pago.monto | currency }}</strong></td>
+                <td>{{ pago.fechaPago | date }}</td>
+                <td>{{ pago.persona.nombre }}</td>
+                <td>{{ pago.persona.apellido }}</td>
+                <td>{{ pago.persona.rol.rol }}</td>
+                <td>{{ pago.tipoPago.tipo }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <div class="alert alert-warning text-center" role="alert">
+        No se encontraron resultados
+      </div>
+    }
+  </section>
+  @if (pagina.totalPages > 1) {
+    <app-pagination [pagina]="pagina" (selectPage)="nextPage($event)"></app-pagination>
+  }
+
+</section>

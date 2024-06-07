@@ -1,0 +1,164 @@
+<div class="modal fade" id="agregarEditarUsuarioModal" tabindex="-1" aria-labelledby="agregarEditarUsuarioModalLabel"
+aria-hidden="true" (shown.bs.modal)="onModalShown()" (hidden.bs.modal)="onModalHidden()">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="agregarEditarUsuarioModalLabel">Agregar/Editar Usuario</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6">
+
+              @if(!usuario){
+                <div class="mb-3">
+                  <label for="username" class="form-label">Nombre de Usuario</label>
+                  <input type="text" id="username" formControlName="username" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('username')}">
+                  <div class="invalid-feedback">
+                    @for (validation of usuarioFormValidationMessage.username; track validation.type) {
+                      @if (usuarioForm.get('username')?.hasError(validation.type) && (usuarioForm.get('username')?.dirty || usuarioForm.get('username')?.touched)) {
+                        <span>{{ validation.message }}</span>
+                      }
+                    }
+                  </div>
+                </div>
+              }
+
+
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" formControlName="email" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('email')}">
+                <div class="invalid-feedback">
+                  @for (validation of usuarioFormValidationMessage.email; track validation.type) {
+                    @if (usuarioForm.get('email')?.hasError(validation.type) && (usuarioForm.get('email')?.dirty || usuarioForm.get('email')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="text" id="telefono" formControlName="telefono" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('telefono')}">
+                <div class="invalid-feedback">
+                  @for (validation of usuarioFormValidationMessage.telefono; track validation.type) {
+                    @if (usuarioForm.get('telefono')?.hasError(validation.type) && (usuarioForm.get('telefono')?.dirty || usuarioForm.get('telefono')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+
+
+
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" formControlName="nombre" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('nombre')}">
+                <div class="invalid-feedback">
+                  @for (validation of usuarioFormValidationMessage.nombre; track validation.type) {
+                    @if (usuarioForm.get('nombre')?.hasError(validation.type) && (usuarioForm.get('nombre')?.dirty || usuarioForm.get('nombre')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" id="apellido" formControlName="apellido" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('apellido')}">
+                <div class="invalid-feedback">
+                  @for (validation of usuarioFormValidationMessage.apellido; track validation.type) {
+                    @if (usuarioForm.get('apellido')?.hasError(validation.type) && (usuarioForm.get('apellido')?.dirty || usuarioForm.get('apellido')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+
+              @if(!usuario){
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input type="password" id="password" formControlName="password" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('password')}">
+                  <div class="invalid-feedback">
+                    @for (validation of usuarioFormValidationMessage.password; track validation.type) {
+                      @if (usuarioForm.get('password')?.hasError(validation.type) && (usuarioForm.get('password')?.dirty || usuarioForm.get('password')?.touched)) {
+                        <span>{{ validation.message }}</span>
+                      }
+                    }
+                  </div>
+                </div>
+
+
+                <div class="mb-3">
+                  <label for="repeatPassword" class="form-label">Repetir Contraseña</label>
+                  <input type="password" id="repeatPassword" formControlName="repeatPassword" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('repeatPassword')}">
+                  <div class="invalid-feedback">
+                    @for (validation of usuarioFormValidationMessage.repeatPassword; track validation.type) {
+                      @if (usuarioForm.get('repeatPassword')?.hasError(validation.type) && (usuarioForm.get('repeatPassword')?.dirty || usuarioForm.get('repeatPassword')?.touched)) {
+                        <span>{{ validation.message }}</span>
+                      }
+                    }
+                  </div>
+                </div>
+              }
+
+              <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" id="direccion" formControlName="direccion" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('direccion')}">
+                <div class="invalid-feedback">
+                  @for (validation of usuarioFormValidationMessage.direccion; track validation.type) {
+                    @if (usuarioForm.get('direccion')?.hasError(validation.type) && (usuarioForm.get('direccion')?.dirty || usuarioForm.get('direccion')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('fechaNacimiento')}">
+                <div class="invalid-feedback">
+                  @for (validation of usuarioFormValidationMessage.fechaNacimiento; track validation.type) {
+                    @if (usuarioForm.get('fechaNacimiento')?.hasError(validation.type) && (usuarioForm.get('fechaNacimiento')?.dirty || usuarioForm.get('fechaNacimiento')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="genero" class="form-label">Género</label>
+                <select id="genero" formControlName="genero" class="form-select" [ngClass]="{'is-invalid': isFieldInvalid('genero')}">
+                  @for (genero of generos; track genero.id) {
+                    <option [value]="genero.id">{{ genero.nombre }}</option>
+                  }
+                </select>
+                <div class="invalid-feedback">
+                  @for (validation of usuarioFormValidationMessage.genero; track validation.type) {
+                    @if (usuarioForm.get('genero')?.hasError(validation.type) && (usuarioForm.get('genero')?.dirty || usuarioForm.get('genero')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="dui" class="form-label">DUI</label>
+                <input type="text" id="dui" formControlName="dui" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('dui')}">
+                <div class="invalid-feedback">
+                  @for (validation of usuarioFormValidationMessage.dui; track validation.type) {
+                    @if (usuarioForm.get('dui')?.hasError(validation.type) && (usuarioForm.get('dui')?.dirty || usuarioForm.get('dui')?.touched)) {
+                      <span>{{ validation.message }}</span>
+                    }
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="usuarioForm.invalid">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="modal fade" id="realizarPrestamoModal" tabindex="-1" aria-labelledby="realizarPrestamoModalLabel"
+aria-hidden="true" (shown.bs.modal)="onModalShown()">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-secondary text-white">
+        <h5 class="modal-title" id="realizarPrestamoModalLabel">Realizar Préstamo</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="my-4">
+          <div class="col-md-12">
+            <form class="d-flex justify-content-center align-items-md-center" (submit)="searchMaterial()">
+              <input class="form-control me-2 shadow" type="number" [formControl]="id" placeholder="Buscar material, introduce el ID..." aria-label="Buscar" style="max-width: 600px;">
+              <button class="btn btn-outline-primary shadow" type="submit">Buscar</button>
+            </form>
+          </div>
+        </div>
+
+        @if (miembro) {
+          <div class="section mt-4">
+            <h5 class="text-primary"><strong>Detalles del Miembro</strong></h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Nombre:</strong> {{ miembro.nombre }} {{ miembro.apellido }}</p>
+                <p><strong>Email:</strong> {{ miembro.email }}</p>
+                <p><strong>Estado de usuario:</strong> {{ miembro.estadoUsuario.estado }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>DUI:</strong> {{ miembro.dui }}</p>
+                <p><strong>Teléfono:</strong> {{ miembro.telefono }}</p>
+                <p><strong>Préstamos Activos:</strong> {{ materialActualPrestado }}</p>
+              </div>
+            </div>
+
+
+
+          </div>
+        }
+
+        <!-- Detalles del Material -->
+        @if (material) {
+          <div class="section mt-4">
+            <h5 class="text-primary"><strong>Detalles del Material</strong></h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>ID material:</strong> {{ material.id }}</p>
+                <p><strong>Título:</strong> {{ material.titulo }}</p>
+                <p><strong>Descripción:</strong> {{ material.descripcion }}</p>
+                <p><strong>Stock:</strong> {{ material.inventario.stock }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Categoria:</strong> {{ material.categoria.nombre }}</p>
+                <p><strong>ISBN:</strong> {{ material.isbn }}</p>
+                <p><strong>Autor:</strong> {{ material.autor.autor }}</p>
+                <p><strong>Disponibilidad:</strong> {{ material.estadoMaterial.estado }}</p>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- Detalles del Bibliotecario -->
+        @if (bibliotecario) {
+          <div class="section mt-4">
+            <h5 class="text-primary"><strong>Detalles del Bibliotecario</strong></h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Nombre:</strong> {{ bibliotecario.nombre }} {{ bibliotecario.apellido }}</p>
+                <p><strong>Email:</strong> {{ bibliotecario.email }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>DUI:</strong> {{ bibliotecario.dui }}</p>
+                <p><strong>Rol:</strong> {{ bibliotecario.rol.rol }}</p>
+
+              </div>
+            </div>
+          </div>
+        }
+
+      <div class="modal-footer">
+        <div class="w-100 d-flex justify-content-between align-items-center">
+          <button type="button" class="btn btn-primary" (click)="agregarPrestamo()" [disabled]="!miembro || !material || !bibliotecario || material.inventario.stock < 1 || material.estadoMaterial.estado === 'Desactivado' || materialActualPrestado! >= 5 || miembro.estadoUsuario.estado === 'SANCIONADO' || miembro.estadoUsuario.estado === 'DESACTIVADO'">Agregar Préstamo</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

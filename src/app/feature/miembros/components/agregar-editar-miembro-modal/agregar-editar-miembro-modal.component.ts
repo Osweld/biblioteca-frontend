@@ -103,6 +103,7 @@ MiembroSave!: MiembroSave;
   }
 
   onModalShown(){
+    this.miembroForm.reset();
     if (this.miembro) {
       this.miembroForm.reset({
         nombre: this.miembro.nombre,

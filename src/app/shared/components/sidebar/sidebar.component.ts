@@ -14,9 +14,16 @@ export class SidebarComponent {
   sidebarMenu: SidebarMenu[] = [
     {name: 'Dashboard', route: '/dashboard'},
     {name:'Material', route: '/material'},
+    {name:'Autores', route: '/autores'},
     {name:'Miembros', route: '/miembros'},
     {name:'Bibliotecario', route: '/bibliotecarios'},
     {name:'Prestamos', route: '/prestamos'},
-    {name:'Devoluciones', route: '/devoluciones'},
+    {name:'Pagos', route: '/pagos'},
+    {name:'Egresos', route: '/egresos'},
   ]
+
+
+  logout(){
+    console.log('logout');
+  }
 }

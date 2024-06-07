@@ -1,1 +1,86 @@
-<p>configuracion works!</p>
+<section class="section-bg-light-gray rounded p-4">
+  <section class="d-flex justify-content-center align-items-center">
+    <h1 class="text-center">Configuracion de usuario</h1>
+  </section>
+
+  <div class="mt-4 p-4 bg-light rounded shadow-sm">
+    @if (usuario) {
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mb-4">
+            <div class="card-body shadow">
+              <h5 class="card-title"><strong>ID:</strong> {{ usuario.id }}</h5>
+              <p class="card-text"><strong>Nombre:</strong> {{ usuario.persona.nombre }} {{ usuario.persona.apellido }}</p>
+              <p class="card-text"><strong>Email:</strong> {{ usuario.persona.email }}</p>
+              <p class="card-text"><strong>Teléfono:</strong> {{ usuario.persona.telefono }}</p>
+              <p class="card-text"><strong>Dirección:</strong> {{ usuario.persona.direccion }}</p>
+              <p class="card-text"><strong>DUI:</strong> {{ usuario.persona.dui }}</p>
+              <p class="card-text"><strong>Fecha de Nacimiento:</strong> {{ usuario.persona.fechaNacimiento | date }}</p>
+              @if (usuario.persona.ingreso) {
+                <p class="card-text"><strong>Fecha de Ingreso:</strong> {{ usuario.persona.ingreso | date }}</p>
+              }
+              @if (usuario.persona.expiracionMembresia) {
+                <p class="card-text"><strong>Expiración de Membresía:</strong> {{ usuario.persona.expiracionMembresia | date }}</p>
+              }
+              @if (usuario.persona.rol) {
+                <p class="card-text"><strong>Rol:</strong> {{ usuario.persona.rol.rol }}</p>
+              }
+              @if (usuario.persona.estadoUsuario) {
+                <p class="card-text"><strong>Estado del Usuario:</strong> {{ usuario.persona.estadoUsuario.estado }}</p>
+              }
+              @if (usuario.persona.genero) {
+                <p class="card-text"><strong>Género:</strong> {{ usuario.persona.genero.nombre }}</p>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div class="alert alert-warning text-center" role="alert">
+        No se encontró información del usuario
+      </div>
+    }
+  </div>
+
+  <div class="mt-4 p-4 bg-light rounded shadow-sm">
+    <h2 class="text-center mb-4">Cambiar Contraseña</h2>
+    <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()" class="mx-5">
+      <div class="mb-3">
+        <label for="currentPassword" class="form-label">Contraseña Actual</label>
+        <input type="password" id="currentPassword" formControlName="currentPassword" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('currentPassword')}">
+        <div class="invalid-feedback">
+          @for (validation of passwordFormValidationMessage.currentPassword; track $index) {
+            @if (passwordForm.get('currentPassword')?.hasError(validation.type) && (passwordForm.get('currentPassword')?.dirty || passwordForm.get('currentPassword')?.touched)) {
+              <span>{{ validation.message }}</span>
+            }
+          }
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="newPassword" class="form-label">Nueva Contraseña</label>
+        <input type="password" id="newPassword" formControlName="newPassword" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('newPassword')}">
+        <div class="invalid-feedback">
+          @for (validation of passwordFormValidationMessage.newPassword; track $index) {
+            @if (passwordForm.get('newPassword')?.hasError(validation.type) && (passwordForm.get('newPassword')?.dirty || passwordForm.get('newPassword')?.touched)) {
+              <span>{{ validation.message }}</span>
+            }
+          }
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('confirmPassword')}">
+        <div class="invalid-feedback">
+          @for (validation of passwordFormValidationMessage.confirmPassword; track $index) {
+            @if (passwordForm.get('confirmPassword')?.hasError(validation.type) && (passwordForm.get('confirmPassword')?.dirty || passwordForm.get('confirmPassword')?.touched)) {
+              <span>{{ validation.message }}</span>
+            }
+          }
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100" [disabled]="passwordForm.invalid">Actualizar Contraseña</button>
+    </form>
+  </div>
+
+
+</section>

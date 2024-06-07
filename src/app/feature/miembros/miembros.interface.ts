@@ -70,3 +70,15 @@ export interface Sort {
   sorted:   boolean;
   unsorted: boolean;
 }
+
+export interface Costos {
+  id:       number;
+  monto:    number;
+  tipoPago: TipoPago;
+}
+
+export interface TipoPago {
+  id:   number;
+  tipo: string;
+}
+

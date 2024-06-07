@@ -5,17 +5,36 @@
   <div class="my-4">
     <div class="col-md-12">
       <form class="d-flex justify-content-center align-items-md-center">
-        <input class="form-control me-2" type="number" [formControl]="id" placeholder="Buscar miembro, introduce el DUI..." aria-label="Buscar" style="max-width: 600px;">
-        <button class="btn btn-outline-primary" type="submit" (click)="searchMiembro()">Buscar</button>
+        <input class="form-control me-2 shadow" [formControl]="dui" placeholder="Buscar miembro, introduce el DUI..." aria-label="Buscar" style="max-width: 600px;">
+        <button class="btn btn-outline-primary shadow" type="submit" (click)="searchMiembro()">Buscar</button>
       </form>
     </div>
   </div>
   <section class="pt-4">
-    <div class="d-flex justify-content-end align-items-center">
-      <a class="btn btn-outline-primary" (click)="openModalAgregar()">Agregar material educativo</a>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <p class="fs-2">Costo de inscripcion:
+          @if(costo){
+            <strong>{{ costo.monto | currency: 'USD'}}</strong>
+          } @else {
+            <strong>cargando...</strong>
+          }
+         </p>
+      </div>
+      <a class="btn btn-outline-primary my-1 shadow" (click)="openModalAgregar()">Agregar Miembro</a>
     </div>
   </section>
-  <section class="mx-4">
+  <section class="my-3 d-flex justify-content-end">
+
+    <div class="col-md-4">
+      <form class="d-flex justify-content-center align-items-md-center">
+        <input class="form-control me-2 shadow" [formControl]="duiEditar" placeholder="Editar miembro, introduce el DUI..." aria-label="Buscar" style="max-width: 600px;">
+        <button class="btn btn-outline-primary shadow" type="submit" (click)="editarByDUI()">Editar</button>
+      </form>
+    </div>
+
+  </section>
+  <section class="mx-4 shadow">
     @if(miembrosPage) {
       <div class="table-container mt-4">
         <table class="table table-striped">
@@ -25,7 +44,6 @@
               <th scope="col">Nombre</th>
               <th scope="col">Apellido</th>
               <th scope="col">Email</th>
-              <th scope="col">Fecha de Nacimiento</th>
               <th scope="col">Género</th>
               <th scope="col">Estado del Usuario</th>
               <th scope="col">DUI</th>
@@ -40,12 +58,11 @@
                 <td>{{ miembro.nombre }}</td>
                 <td>{{ miembro.apellido }}</td>
                 <td>{{ miembro.email }}</td>
-                <td>{{ miembro.fechaNacimiento | date }}</td>
                 <td>{{ miembro.genero.nombre }}</td>
                 <td>{{ miembro.estadoUsuario.estado }}</td>
                 <td>{{ miembro.dui }}</td>
-                <td><a class="btn text-bg-secondary" (click)="openModalVer(miembro)">Ver Info</a></td>
-                <td><a class="btn text-bg-dark" (click)="openModalEditar(miembro)">Editar</a></td>
+                <td><a class="btn text-bg-secondary shadow" (click)="openModalVer(miembro)">Ver Info</a></td>
+                <td><a class="btn text-bg-dark shadow" (click)="openModalEditar(miembro)">Editar</a></td>
               </tr>
             }
           </tbody>
@@ -57,6 +74,10 @@
       </div>
     }
   </section>
+
+  @if (pagina.totalPages > 1) {
+    <app-pagination [pagina]="pagina" (selectPage)="nextPage($event)"></app-pagination>
+  }
 </section>
 
 

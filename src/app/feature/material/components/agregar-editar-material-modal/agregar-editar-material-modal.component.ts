@@ -39,6 +39,7 @@ export class AgregarEditarMaterialModalComponent {
 
 
   onModalShown(): void {
+    this.materialForm.reset();
     if (this.material) {
       this.materialForm.reset({
         isbn: this.material.isbn,

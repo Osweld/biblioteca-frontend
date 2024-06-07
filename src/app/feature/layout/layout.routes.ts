@@ -1,4 +1,7 @@
 import { Routes } from "@angular/router";
+import {EgresosComponent} from "../egresos/pages/egresos/egresos.component";
+import { PagosComponent } from "../pagos/pages/pagos/pagos.component";
+import { AutoresComponent } from "../autores/pages/autores/autores.component";
 
 
 export const LAYOUT_ROUTES: Routes = [
@@ -10,8 +13,10 @@ export const LAYOUT_ROUTES: Routes = [
       {path:'miembros',loadChildren: () => import('../miembros/miembros.routes').then(m => m.MIEMBROS_ROUTES)},
       {path:'bibliotecarios',loadChildren: () => import('../bibliotecarios/bibliotecarios.routes').then(m => m.BIBLIOTECARIOS_ROUTES)},
       {path:'prestamos',loadChildren: () => import('../prestamos/prestamos.routes').then(m => m.PRESTAMOS_ROUTES)},
-      {path:'devoluciones',loadChildren: () => import('../devoluciones/devoluciones.routes').then(m => m.DEVOLUCIONES_ROUTES)},
-      {path:'configuracion',loadChildren: () => import('../configuracion/configuracion.routes').then(m => m.CONFIGURACION_ROUTES)}
+      {path:'configuracion',loadChildren: () => import('../configuracion/configuracion.routes').then(m => m.CONFIGURACION_ROUTES)},
+      {path:'pagos', component: PagosComponent},
+      {path:'egresos', component: EgresosComponent},
+      {path:'autores',component: AutoresComponent},
     ]
   },
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'}

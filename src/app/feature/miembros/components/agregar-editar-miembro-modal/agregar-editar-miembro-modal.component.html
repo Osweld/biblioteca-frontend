@@ -75,7 +75,6 @@ aria-hidden="true">
               <div class="mb-3">
                 <label for="genero" class="form-label">Género</label>
                 <select id="genero" formControlName="genero" class="form-select">
-                  <option value="">-- Seleccione una opcion --</option>
                   @for (genero of generos; track $index) {
                   <option [value]="genero.id">{{ genero.nombre }}</option>
                   }
@@ -95,7 +94,6 @@ aria-hidden="true">
               <div class="mb-3">
                 <label for="rol" class="form-label">Rol</label>
                 <select id="rol" formControlName="rol" class="form-select">
-                  <option value="">-- Seleccione una opcion --</option>
                   @for (rol of roles; track $index) {
                   <option [value]="rol.id">{{ rol.rol }}</option>
                   }

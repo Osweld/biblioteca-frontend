@@ -1,0 +1,17 @@
+<div class="modal fade" id="eliminarAutorModal" tabindex="-1" aria-labelledby="eliminarAutorModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="eliminarAutorModalLabel">Eliminar Autor</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro que deseas eliminar el autor <strong>{{ autor?.autor }}</strong> con ID <strong>{{ autor?.id }}</strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="deleteAutor()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -29,7 +29,8 @@
       </div>
       <div class="modal-footer">
         <div class="w-100 d-flex justify-content-between align-items-center">
-         <p><strong class="fs-3">{{miembro?.rol?.rol}}</strong></p>
+         <strong class="fs-3">{{miembro?.rol?.rol}}</strong>
+         <button type="button" class="btn btn-primary" (click)="actualizarMembresia(miembro!)">Actualizar Membresia</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>

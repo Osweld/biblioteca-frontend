@@ -1,1 +1,120 @@
-<p>prestamos works!</p>
+<section class="section-bg-light-gray rounded p-4">
+  <section class="d-flex justify-content-center align-items-center">
+    <h1 class="text-center">Prestamos</h1>
+  </section>
+  <div class="my-4">
+    <div class="col-md-12">
+      <form class="d-flex justify-content-center align-items-md-center">
+        <input class="form-control me-2 shadow" [formControl]="dui" placeholder="Buscar miembro, introduce el DUI..."
+          aria-label="Buscar" style="max-width: 600px;">
+        <button class="btn btn-outline-primary shadow" type="submit" (click)="searchMiembro()">Buscar</button>
+      </form>
+    </div>
+  </div>
+
+  @if(miembro){
+
+  <section class="d-flex justify-content-center align-items-center">
+    <h3 class="text-center">Prestamos actuales</h3>
+  </section>
+
+  <section class="mx-4 d-flex justify-content-between align-items-center">
+    <p>Maximo de prestamos : <strong>5</strong></p>
+    <a class="btn btn-outline-primary my-1 shadow" (click)="openModalRealizarPrestamo()">Realizar prestamo</a>
+  </section>
+
+  <section class="mx-4 shadow">
+    @if (prestamosActuales) {
+    <div class="table-container mt-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Fecha Inicio</th>
+            <th scope="col">Fecha Entrega</th>
+            <th scope="col">Miembro</th>
+            <th scope="col">Material</th>
+            <th scope="col">Estado Prestamo</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (prestamo of prestamosActuales; track prestamo.id) {
+          <tr>
+            <td>{{ prestamo.id }}</td>
+            <td>{{ prestamo.fechaInicio | date }}</td>
+            <td>{{ prestamo.fechaEntrega | date }}</td>
+            <td>{{ prestamo.miembro.nombre }} {{ prestamo.miembro.apellido }}</td>
+            <td>{{ prestamo.material.titulo }}</td>
+            <td>{{ prestamo.estadoPrestamo.estado }}</td>
+            <td><button class="btn text-bg-secondary shadow" (click)="openModalVer(prestamo)">Ver Info</button></td>
+          </tr>
+          }@empty {
+            <tr>
+              <td colspan="6" class="text-center">No se encontraron resultados</td>
+            }
+        </tbody>
+      </table>
+    </div>
+    } @else {
+    <div class="alert alert-warning text-center" role="alert">
+      No se encontraron resultados
+    </div>
+    }
+  </section>
+
+  <section class="d-flex justify-content-center align-items-center">
+    <h3 class="text-center">Historial de prestamos</h3>
+  </section>
+
+
+  <section class="mx-4 shadow">
+    @if (prestamosHistorial) {
+    <div class="table-container mt-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Fecha Inicio</th>
+            <th scope="col">Fecha Entrega</th>
+            <th scope="col">Miembro</th>
+            <th scope="col">Material</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (prestamo of prestamosHistorial.content; track prestamo.id) {
+          <tr>
+            <td>{{ prestamo.id }}</td>
+            <td>{{ prestamo.fechaInicio | date }}</td>
+            <td>{{ prestamo.fechaEntrega | date }}</td>
+            <td>{{ prestamo.miembro.nombre }} {{ prestamo.miembro.apellido }}</td>
+            <td>{{ prestamo.material.titulo }}</td>
+            <td><button class="btn text-bg-secondary shadow" (click)="openModalVer(prestamo)">Ver Info</button></td>
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="6" class="text-center">No se encontraron resultados</td>
+          }
+        </tbody>
+      </table>
+    </div>
+    } @else {
+    <div class="alert alert-warning text-center" role="alert">
+      No se encontraron resultados
+    </div>
+    }
+  </section>
+  @if (pagina.totalPages > 1) {
+  <app-pagination [pagina]="pagina" (selectPage)="nextPage($event)"></app-pagination>
+  }
+  } @else {
+  <div class="alert alert-secondary text-center" role="alert">
+    Introduzca el DUI de un miembro para ver sus prestamos
+  </div>
+  }
+
+</section>
+
+<app-ver-prestamo-modal [prestamo]="prestamoSelects"></app-ver-prestamo-modal>
+<app-realizar-prestamo-modal [miembro]="miembroSelects" [materialActualPrestado]="numeroMaterial"></app-realizar-prestamo-modal>

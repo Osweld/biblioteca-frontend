@@ -1,0 +1,60 @@
+<section class="section-bg-light-gray rounded p-4">
+  <section class="d-flex justify-content-center align-items-center">
+    <h1 class="text-center">Autores</h1>
+  </section>
+
+  <div class="my-4">
+    <div class="col-md-12">
+      <form class="d-flex justify-content-center align-items-md-center">
+        <input class="form-control me-2 shadow" [formControl]="id" placeholder="Buscar autor, introduce el ID..."
+          aria-label="Buscar" style="max-width: 600px;">
+        <button class="btn btn-outline-primary shadow" type="submit" (click)="searchAutor()">Buscar</button>
+      </form>
+    </div>
+  </div>
+
+  <section class="pt-4">
+    <div class="d-flex justify-content-end align-items-center">
+      <a class="btn btn-outline-primary shadow" (click)="openModalAgregar()">Agregar Autor</a>
+    </div>
+  </section>
+
+  <section class="mx-4 shadow">
+    @if(autorPage) {
+    <div class="table-container mt-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 10%;">ID</th>
+            <th scope="col" style="width: 70%;">Nombre del Autor</th>
+            <th scope="col" style="width: 10%;"></th>
+            <th scope="col" style="width: 10%;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (autor of autorPage.content; track autor.id) {
+          <tr>
+            <td>{{ autor.id }}</td>
+            <td>{{ autor.autor }}</td>
+            <td class="text-end"><a class="btn text-bg-secondary shadow" (click)="openModalEditar(autor)">Editar</a>
+            </td>
+            <td class="text-end"><a class="btn text-bg-danger shadow" (click)="openModalEliminar(autor)">Eliminar</a>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    } @else {
+    <div class="alert alert-warning text-center" role="alert">
+      No se encontraron resultados
+    </div>
+    }
+  </section>
+  @if (pagina.totalPages > 1) {
+  <app-pagination [pagina]="pagina" (selectPage)="nextPage($event)"></app-pagination>
+  }
+</section>
+
+<app-agregar-editar-autor-modal [autor]="autorSelected"></app-agregar-editar-autor-modal>
+<app-eliminar-autor-modal [autor]="autorSelected"></app-eliminar-autor-modal>

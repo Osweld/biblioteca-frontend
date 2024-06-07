@@ -5,14 +5,14 @@
   <div class="my-4">
     <div class="col-md-12">
       <form class="d-flex justify-content-center align-items-md-center">
-        <input class="form-control me-2" type="number" [formControl]="id" placeholder="Buscar material, introduce el ID..." aria-label="Buscar" style="max-width: 600px;">
-        <button class="btn btn-outline-primary" type="submit" (click)="searchMaterial()">Buscar</button>
+        <input class="form-control me-2 shadow" type="number" [formControl]="id" placeholder="Buscar material, introduce el ID..." aria-label="Buscar" style="max-width: 600px;">
+        <button class="btn btn-outline-primary shadow" type="submit" (click)="searchMaterial()">Buscar</button>
       </form>
     </div>
   </div>
   @if(idiomas.length > 0 && autores.length > 0 && categorias.length > 0 && estadoMaterial.length > 0){
   <section>
-    <form [formGroup]="FilterData" (ngSubmit)="onFilterSubmit()" class="p-4 bg-light rounded shadow-sm">
+    <form [formGroup]="FilterData" (ngSubmit)="onFilterSubmit()" class="p-4 bg-light rounded">
       <div class="row mb-3">
         <div class="col-md-3">
           <label for="idioma" class="form-label">Idioma</label>
@@ -52,18 +52,26 @@
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <button type="submit" class="font-bold btn btn-primary py-2 px-5">Filtrar</button>
+        <button type="submit" class="font-bold btn btn-primary py-2 px-5 shadow">Filtrar</button>
       </div>
     </form>
     </section>
   }
     <section class="pt-4">
       <div class="d-flex justify-content-end align-items-center">
-        <a class="btn btn-outline-primary" (click)="openModalAgregar()">Agregar material educativo</a>
+        <a class="btn btn-outline-primary shadow" (click)="openModalAgregar()">Agregar material educativo</a>
+      </div>
+    </section>
+    <section class="my-3 d-flex justify-content-end">
+      <div class="col-md-4">
+        <form class="d-flex justify-content-center align-items-md-center">
+          <input class="form-control me-2 shadow" type="number" [formControl]="idEditar" placeholder="Editar material, introduce el ID..." aria-label="Editar" style="max-width: 600px;">
+          <button class="btn btn-outline-primary shadow" type="submit" (click)="editarMaterialById()">Buscar</button>
+        </form>
       </div>
     </section>
 
-  <section class="mx-4">
+  <section class="mx-4 shadow">
 @if(materialPage){
 
 
@@ -93,8 +101,8 @@
             <td>{{ material.categoria.nombre }}</td>
             <td>{{ material.estadoMaterial.estado }}</td>
             <td>{{ material.cantidad }} / {{material.inventario.stock}}</td>
-            <td><a class="btn text-bg-secondary" (click)="openModalVer(material)">Ver Info</a></td>
-            <td><a class="btn text-bg-dark" (click)="openModalEditar(material)">Editar</a></td>
+            <td><a class="btn text-bg-secondary shadow" (click)="openModalVer(material)">Ver Info</a></td>
+            <td><a class="btn text-bg-dark shadow" (click)="openModalEditar(material)">Editar</a></td>
           </tr>
             }
         </tbody>

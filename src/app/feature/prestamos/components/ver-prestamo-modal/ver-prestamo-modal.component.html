@@ -1,0 +1,108 @@
+<div class="modal fade" id="verPrestamoModal" tabindex="-1" aria-labelledby="verPrestamoModalLabel" aria-hidden="true" (shown.bs.modal)="onModalShown()">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-secondary text-white">
+        <h5 class="modal-title" id="verPrestamoModalLabel">Detalles del Préstamo</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <section>
+          @if(prestamo?.estadoPrestamo?.estado === 'RETRASO' && montoMora > 0){
+            <div class="alert alert-warning text-center" role="alert">
+              <p><strong>Préstamo presenta retraso</strong></p>
+              <p>La multa por retraso es: <strong>{{montoMora | currency : 'USD'}}</strong></p>
+            </div>
+          }
+        </section>
+        @if (prestamo) {
+          <div class="section mb-4">
+            <h5 class="text-primary"><strong>Detalles del Préstamo</strong></h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>ID Préstamo:</strong> {{ prestamo.id }}</p>
+                <p><strong>Fecha Inicio:</strong> {{ prestamo.fechaInicio | date }}</p>
+                <p><strong>Fecha Entrega:</strong> {{ prestamo.fechaEntrega | date }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Estado del Préstamo:</strong> {{ prestamo.estadoPrestamo.estado }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section mb-4">
+            <h5 class="text-primary"><strong>Detalles del Miembro</strong></h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Nombre:</strong> {{ prestamo.miembro.nombre }} {{ prestamo.miembro.apellido }}</p>
+                <p><strong>Email:</strong> {{ prestamo.miembro.email }}</p>
+                <p><strong>Rol:</strong> {{ prestamo.miembro.rol.rol }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>DUI:</strong> {{ prestamo.miembro.dui }}</p>
+                <p><strong>Teléfono:</strong> {{ prestamo.miembro.telefono }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section mb-4">
+            <h5 class="text-primary"><strong>Detalles del Bibliotecario</strong></h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Nombre:</strong> {{ prestamo.bibliotecario.nombre }} {{ prestamo.bibliotecario.apellido }}</p>
+                <p><strong>Email:</strong> {{ prestamo.bibliotecario.email }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>DUI:</strong> {{ prestamo.bibliotecario.dui }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h5 class="text-primary"><strong>Detalles del Material</strong></h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>ID Material:</strong> {{ prestamo.material.id }}</p>
+                <p><strong>Título:</strong> {{ prestamo.material.titulo }}</p>
+                <p><strong>Descripción:</strong> {{ prestamo.material.descripcion }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>ISBN:</strong> {{ prestamo.material.isbn }}</p>
+                <p><strong>Categoría:</strong> {{ prestamo.material.categoria.nombre }}</p>
+                <p><strong>Autor:</strong> {{ prestamo.material.autor.autor }}</p>
+                <p><strong>Stock:</strong> {{ prestamo.material.inventario.stock }}</p>
+                <p><strong>Disponibilidad:</strong> {{ prestamo.material.estadoMaterial.estado }}</p>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <p>No se encontró información del préstamo</p>
+        }
+      </div>
+      @if(prestamo?.estadoPrestamo?.estado === 'ACTIVO' || prestamo?.estadoPrestamo?.estado === 'RETRASO'){
+        <section>
+          <div class="alert alert-warning text-center" role="alert">
+            <p><strong>Si el material educativo fue dañado o no entregado</strong></p>
+            <p>La multa por irresponsabilidad es de : <strong>{{montoPerdida | currency : 'USD'}}</strong></p>
+          </div>
+      </section>
+      }
+
+      <div class="modal-footer">
+        <div class="w-100 d-flex justify-content-between align-items-center">
+          @if(prestamo?.estadoPrestamo?.estado === 'ACTIVO' || prestamo?.estadoPrestamo?.estado === 'RETRASO') {
+            <button type="button" class="btn btn-primary" (click)="devolverPrestamo()">Devolver Préstamo</button>
+          }
+
+          @if(prestamo?.estadoPrestamo?.estado === 'ACTIVO' || prestamo?.estadoPrestamo?.estado === 'RETRASO') {
+            <button type="button" class="btn btn-danger" (click)="devolverPrestamoSinMaterial()">Devolver préstamo Sin Material</button>
+          }
+          @if (prestamo?.miembro?.rol?.rol === 'PROFESOR') {
+            <button type="button" class="btn btn-outline-secondary" (click)="renovarPrestamo()">Renovar Préstamo</button>
+          }
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

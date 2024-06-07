@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { EstadoUsuario, Genero, Miembro, MiembroSave, MiembrosPage, Rol } from './miembros.interface';
+import { Costos, EstadoUsuario, Genero, Miembro, MiembroSave, MiembrosPage, Rol } from './miembros.interface';
 import { Observable, Subject, tap } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environment';
@@ -69,5 +69,9 @@ export class MiembrosService {
 
   getRol(): Observable<Rol[]> {
     return this.http.get<Rol[]>(`${this.apiUrl}/rol`);
+  }
+
+  getCostoMembresia(): Observable<Costos> {
+    return this.http.get<Costos>(`${this.apiUrl}/mora/tipo-pago/1`);
   }
 }
