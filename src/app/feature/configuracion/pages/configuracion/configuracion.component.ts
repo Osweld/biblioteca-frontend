@@ -15,7 +15,7 @@ import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModu
 export default class ConfiguracionComponent {
 
   usuario!: Usuario;
-  usuarioId: number = 7;
+ usuarioLocalStorage:Usuario = JSON.parse(localStorage.getItem('usuario')!);
 
   public configuracionService = inject(ConfiguracionService);
   public sharedService = inject(SharedService);
@@ -66,7 +66,7 @@ export default class ConfiguracionComponent {
       confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]]
     }, { validators: this.samePassword('newPassword', 'confirmPassword') });
 
-    this.configuracionService.findById(this.usuarioId).subscribe({
+    this.configuracionService.findById(this.usuarioLocalStorage.id).subscribe({
       next: data => {
         this.usuario = data;
       },
@@ -91,7 +91,7 @@ export default class ConfiguracionComponent {
       }
 
       console.log(passwordDTO)
-      this.configuracionService.updatePassword(this.usuarioId, passwordDTO).subscribe({
+      this.configuracionService.updatePassword(this.usuario.id, passwordDTO).subscribe({
         next: () => {
           this.sharedService.showAlert('success','Contraseña actualizada correctamente')
           this.passwordForm.reset();

@@ -30,6 +30,7 @@ export default class PrestamosComponent {
   private prestamoUpdatedSub!: Subscription;
 
   miembro!: Persona;
+  miembroLocalStorages!: Persona;
   prestamosActuales!: Prestamo[];
   prestamosHistorial!: PrestamoPage;
 
@@ -48,11 +49,32 @@ export default class PrestamosComponent {
   dui = new FormControl('');
 
   constructor() {
-
-
     this.prestamoUpdatedSub = this.prestamoService.getPrestamoUpdatedListener().subscribe({
       next: () => {
-        this.searchMiembro();
+        this.miembroLocalStorages = JSON.parse(localStorage.getItem("miembro")!);
+        this.prestamoService.getPersonaByDui(this.miembroLocalStorages.dui).subscribe({
+          next: data => {
+            this.miembro = data;
+            localStorage.setItem("miembro",JSON.stringify(this.miembro));
+            localStorage.setItem("miembro",JSON.stringify(this.miembro));
+            this.prestamoService.getActivePrestamosByPersonaId(this.miembro.id).subscribe(data => {
+              this.prestamosActuales = data;
+              this.numeroMaterial = this.prestamosActuales.length | 0;
+              this
+            });
+            this.prestamoService.getHistorialPrestamosByPersonaId(this.miembro.id,this.page,this.size).subscribe(data => {
+              this.prestamosHistorial = data;
+              this.pagina = {
+                totalElements: data.totalElements,
+                totalPages: data.totalPages,
+                page: data.number
+              }
+            });
+          },
+          error: error => {
+            this.sharedService.showAlert('danger', 'No se encontró el miembro con el DUI ingresado.')
+          }
+        });
       }
     });
   }
@@ -62,6 +84,7 @@ export default class PrestamosComponent {
     this.prestamoService.getPersonaByDui(this.dui.value!).subscribe({
       next: data => {
         this.miembro = data;
+        localStorage.setItem("miembro",JSON.stringify(this.miembro));
         this.prestamoService.getActivePrestamosByPersonaId(this.miembro.id).subscribe(data => {
           this.prestamosActuales = data;
           this.numeroMaterial = this.prestamosActuales.length | 0;
@@ -80,7 +103,6 @@ export default class PrestamosComponent {
         this.sharedService.showAlert('danger', 'No se encontró el miembro con el DUI ingresado.')
       }
     });
-
   }
 
 

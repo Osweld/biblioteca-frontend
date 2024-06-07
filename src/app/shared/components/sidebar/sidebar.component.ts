@@ -1,15 +1,34 @@
-import { Component } from '@angular/core';
+import { Usuario } from './../../../feature/configuracion/configuracion.interface';
+import { Component, inject } from '@angular/core';
 import { SidebarMenu } from '../../shared.interface';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+
+ Usuario: Usuario = JSON.parse(localStorage.getItem('usuario')!);
+ horaActual?: string;
+ fecha = new Date();
+  public router = inject(Router);
+
+  ngOnInit(): void {
+    this.actualizarHora();
+    setInterval(() => {
+      this.actualizarHora();
+    }, 1000);
+  }
+
+  actualizarHora(): void {
+    const ahora = new Date();
+    this.horaActual = ahora.toLocaleTimeString();
+  }
 
   sidebarMenu: SidebarMenu[] = [
     {name: 'Dashboard', route: '/dashboard'},
@@ -24,6 +43,7 @@ export class SidebarComponent {
 
 
   logout(){
-    console.log('logout');
+    localStorage.clear()
+    this.router.navigate(['/inicio']);
   }
 }

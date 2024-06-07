@@ -5,7 +5,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule } from '@angular/common';
 import { RecuperarPasswordModalComponent } from '../../components/recuperar-password-modal/recuperar-password-modal.component';
 import { Modal } from 'bootstrap';
-import { Login } from '../../login.interface';
+import { Login, LoginResponse, Usuario } from '../../login.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,8 +22,11 @@ export default class LoginComponent {
   public authService = inject(AuthService);
   public sharedService = inject(SharedService);
   public fb = inject(FormBuilder);
+  public router = inject(Router);
 
   login?:Login
+  loginResponse!:LoginResponse;
+  usuario!:Usuario;
 
   loginForm: FormGroup;
 
@@ -61,9 +65,20 @@ export default class LoginComponent {
       }
     this.authService.login(this.login).subscribe({
       next: response =>{
-        console.log(response)
+        this.loginResponse = response;
+        localStorage.setItem("token",this.loginResponse.token);
+        localStorage.setItem("user",JSON.stringify(this.loginResponse.user));
+        this.authService.findUsuarioById(this.loginResponse.user.id!).subscribe({
+          next: response => {
+            this.usuario = response;
+            localStorage.setItem("bibliotecario",JSON.stringify(this.usuario.persona));
+            localStorage.setItem("usuario",JSON.stringify(this.usuario));
+          }
+        });
+        this.sharedService.showAlert('success','Bienvenido inicio de sesión exitoso');
+        this.router.navigate(['/dashboard'])
       },error: error => {
-        console.error(error);
+        this.sharedService.showAlert('danger','Error al iniciar sesión, verifique sus credenciales');
       }
     })
     }
