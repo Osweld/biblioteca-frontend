@@ -1,1 +1,45 @@
-<h1>dashboard works!</h1>
+<div class="rounded p-4 section-bg-light-gray">
+  <h1 class="text-center mb-5">Dashboard de la Biblioteca</h1>
+  <div class="row justify-content-center mb-4">
+    <!-- Resumen General -->
+    @if (estadisticas) {
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="card shadow-sm mb-3 mx-2" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">Préstamos Activos</h5>
+            <p class="card-text display-5 fw-bold">{{ estadisticas.prestamosActivos }}</p>
+          </div>
+        </div>
+        <div class="card shadow-sm mb-3 mx-2" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">Total de Miembros</h5>
+            <p class="card-text display-5 fw-bold">{{ estadisticas.totalMiembros }}</p>
+          </div>
+        </div>
+        <div class="card shadow-sm mb-3 mx-2" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">Material Educativo Activo</h5>
+            <p class="card-text display-5 fw-bold">{{ estadisticas.totalMaterialEducativoActivo }}</p>
+          </div>
+        </div>
+        <div class="card shadow-sm mb-3 mx-2" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">Total de Préstamos Realizados</h5>
+            <p class="card-text display-5 fw-bold">{{ estadisticas.totalPrestamosRealizados }}</p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <!-- Estadísticas de Préstamos por Día -->
+  <div class="row justify-content-center">
+    <div class="col-md-9 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-card-header text-white text-center">Préstamos por Día (Última Semana)</div>
+        <div class="card-body">
+          <canvas id="prestamosChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

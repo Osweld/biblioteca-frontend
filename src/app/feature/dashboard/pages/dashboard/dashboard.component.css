@@ -1,0 +1,51 @@
+.card {
+  border-radius: 10px;
+}
+
+.card-header {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.shadow-sm {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card-body {
+  font-size: 1rem;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 2rem;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.display-5 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+.section-bg-light-gray {
+  background-color: #f8f9fa;
+}
+
+.bg-card-header{
+  background: linear-gradient(45deg, #007bff, #0056b3);
+}
