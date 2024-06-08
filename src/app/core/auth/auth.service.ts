@@ -23,4 +23,8 @@ export class AuthService {
   findUsuarioById(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
   }
+
+  resetPassword(email: string): Observable<string> {
+    return this.http.get<string>(`${this.apiUrl}/reset-password/${email}`);
+  }
 }

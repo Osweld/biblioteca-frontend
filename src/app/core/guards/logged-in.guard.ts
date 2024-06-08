@@ -9,8 +9,8 @@ export const loggedInGuard: CanActivateFn = (route, state) => {
 
   if (token && !jwtHelper.isTokenExpired(token)) {
     router.navigate(['/dashboard']);
-   return false;
+    return false;
   }
 
-    return true;
+  return true;
 };

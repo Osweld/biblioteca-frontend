@@ -14,7 +14,12 @@ import Dropdown from 'bootstrap/js/dist/dropdown';
 export default class LayoutComponent {
   constructor(private router: Router) {}
 
+  ngOnInit() {
+    console.log("ngOnInit")
+  }
+
   ngAfterViewInit() {
+    console.log("ngAfterViewInit")
     this.initializeDropdown();
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
@@ -24,6 +29,7 @@ export default class LayoutComponent {
   }
 
   initializeDropdown() {
+    console.log("initializeDropdown")
     const dropdownElement = document.getElementById('dropdownUser1');
     if (dropdownElement) {
       const dropdown = new Dropdown(dropdownElement);

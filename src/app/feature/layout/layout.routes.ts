@@ -18,6 +18,5 @@ export const LAYOUT_ROUTES: Routes = [
       {path:'egresos', component: EgresosComponent},
       {path:'autores',component: AutoresComponent},
     ]
-  },
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'}
+  }
 ]
