@@ -1,4 +1,4 @@
 export const environment = {
   producution: true,
-  apiUrl: 'http://localhost:8080'
+  apiUrl: 'https://biblioteca-backend-production-fcd7.up.railway.app'
 }
