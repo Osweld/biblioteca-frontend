@@ -1,8 +1,15 @@
 <div class="rounded p-4 section-bg-light-gray">
   <h1 class="text-center mb-5">Dashboard de la Biblioteca</h1>
-  <div class="row justify-content-center mb-4">
-    <!-- Resumen General -->
-    @if (estadisticas) {
+  <div class="text-center my-4">
+    <button class="btn btn-outline-primary shadow" (click)="downloadPDF()">Descargar PDF</button>
+  </div>
+  <div id="dashboard-content">
+    <div class="row justify-content-center mb-4">
+      <!-- Resumen General -->
+       <div class="d-flex justify-content-center align-items-center mt-5 mb-2">
+        <p class="fs-4 fw-bold">{{fechaActual  | date: 'dd/MM/yyyy'}}</p>
+       </div>
+      @if (estadisticas) {
       <div class="d-flex flex-wrap justify-content-center">
         <div class="card shadow-sm mb-3 mx-2" style="width: 18rem;">
           <div class="card-body text-center">
@@ -29,15 +36,47 @@
           </div>
         </div>
       </div>
-    }
-  </div>
-  <!-- Estadísticas de Préstamos por Día -->
-  <div class="row justify-content-center">
-    <div class="col-md-9 mb-4">
-      <div class="card shadow-sm">
-        <div class="card-header bg-card-header text-white text-center">Préstamos por Día (Última Semana)</div>
-        <div class="card-body">
-          <canvas id="prestamosChart"></canvas>
+      }
+    </div>
+
+    <!-- Ingresos y Egresos -->
+    <div class="row justify-content-center">
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-card-header text-white text-center">Ingresos</div>
+          <div class="card-body">
+            <p class="fs-5"><strong>Dia Anterior: </strong> <strong class="text-success">{{
+                ingresosHistorial?.diaAnterior | currency: 'USD' }}</strong></p>
+            <p class="fs-5"><strong>Última Semana: </strong> <strong class="text-success">{{
+                ingresosHistorial?.ultimaSemana | currency: 'USD' }}</strong></p>
+            <p class="fs-5"><strong>Último Mes: </strong> <strong class="text-success">{{ ingresosHistorial?.ultimoMes |
+                currency: 'USD' }}</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-card-header text-white text-center">Egresos</div>
+          <div class="card-body">
+            <p class="fs-5"><strong>Dia Anterior: </strong> <strong class="text-danger">{{ egresosHistorial?.diaAnterior
+                | currency: 'USD' }}</strong></p>
+            <p class="fs-5"><strong>Última Semana: </strong> <strong class="text-danger">{{
+                egresosHistorial?.ultimaSemana | currency: 'USD' }}</strong></p>
+            <p class="fs-5"><strong>Último Mes: </strong> <strong class="text-danger">{{ egresosHistorial?.ultimoMes |
+                currency: 'USD' }}</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estadísticas de Préstamos por Día -->
+    <div class="row justify-content-center">
+      <div class="col-md-9 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-card-header text-white text-center">Préstamos por Día (Última Semana)</div>
+          <div class="card-body">
+            <canvas id="prestamosChart"></canvas>
+          </div>
         </div>
       </div>
     </div>

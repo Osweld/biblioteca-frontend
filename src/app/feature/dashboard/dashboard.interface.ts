@@ -9,3 +9,10 @@ export interface Estadisticas {
   totalMaterialEducativoActivo: number;
   totalPrestamosRealizados:     number;
 }
+
+export interface Historial {
+  diaAnterior:  number;
+  ultimaSemana: number;
+  ultimoMes:    number;
+}
+

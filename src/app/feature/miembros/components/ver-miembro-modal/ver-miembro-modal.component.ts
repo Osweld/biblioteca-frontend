@@ -4,6 +4,7 @@ import { Component, Input, inject } from '@angular/core';
 import { Miembro } from '../../miembros.interface';
 import { SharedService } from '../../../../shared/shared.service';
 import { Modal } from 'bootstrap';
+import { PdfService } from '../../../../core/pdf/pdf.service';
 
 @Component({
   selector: 'app-ver-miembro-modal',
@@ -17,6 +18,7 @@ export class VerMiembroModalComponent {
 
   public miembroService = inject(MiembrosService);
   public sharedService = inject(SharedService);
+  public pdfService = inject(PdfService);
 
 
   actualizarMembresia(miembro: Miembro) {
@@ -33,5 +35,11 @@ export class VerMiembroModalComponent {
         console.error(error);
       }
     });
+  }
+
+  generateMemberPdf(): void {
+    if (this.miembro) {
+      this.pdfService.generateMemberPdf('memberDetails', 'carnet.pdf', this.miembro.dui);
+    }
   }
 }
